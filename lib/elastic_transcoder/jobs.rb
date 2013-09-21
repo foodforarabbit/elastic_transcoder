@@ -36,6 +36,14 @@ module ElasticTranscoder
       url = @utilities.build_url action
       response = @utilities.execute_post url, headers, creation_params
     end
+
+    def create_hls_job input_key, output, pipeline_id
+      action = "jobs"
+      creation_params = '{"Input":{"Key":"'+input_key+'","FrameRate":"auto","Resolution":"auto","AspectRatio":"auto","Interlaced":"auto","Container":"auto"},'+output+',"PipelineId":"'+pipeline_id+'"}'
+      headers = @utilities.initialize_headers action, {:method=>"POST", :payload=>creation_params}
+      url = @utilities.build_url action
+      response = @utilities.execute_post url, headers, creation_params
+    end
     
     def delete_job job_id
       action = "jobs/#{job_id}"
