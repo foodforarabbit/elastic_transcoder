@@ -47,7 +47,7 @@ module ElasticTranscoder
 
     def create_jobs_with_playlist input_key, output, pipeline_id, playlist
       action = "jobs"
-      creation_params = '{"Input":{"Key":"'+input_key+'","FrameRate":"auto","Resolution":"auto","AspectRatio":"auto","Interlaced":"auto","Container":"auto"},'+output+',"Playlists":[{'+playlist+'}],"PipelineId":"'+pipeline_id+'"}'
+      creation_params = '{"Input":{"Key":"'+input_key+'","FrameRate":"auto","Resolution":"auto","AspectRatio":"auto","Interlaced":"auto","Container":"auto"},"Outputs":'+playlist+',"Playlists":[{'+playlist+'}],"PipelineId":"'+pipeline_id+'"}'
       puts creation_params
       headers = @utilities.initialize_headers action, {:method=>"POST", :payload=>creation_params}
       url = @utilities.build_url action
